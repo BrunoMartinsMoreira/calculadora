@@ -1,22 +1,31 @@
-function criaCalculadura() {
+function createCalculator() {
    return {
       display: document.querySelector('.display'),
 
-      //apaga tudo o que foi digitado
-      inicia() {
+
+      startCalculator() {
          this.clickBtn();
          this.pressEnter();
+         this.pressDelete();
       },
 
       pressEnter() {
          this.display.addEventListener('keyup', (event) => {
             if (event.keyCode === 13) {
-               this.realizaConta()
+               this.startCalculation()
             }
          });
       },
 
-      realizaConta() {
+      pressDelete() {
+         this.display.addEventListener('keyup', (event) => {
+            if (event.keyCode === 46) {
+               this.clearDisplay();
+            }
+         })
+      },
+
+      startCalculation() {
          let conta = this.display.value;
          try {
             conta = eval(conta);
@@ -39,16 +48,16 @@ function criaCalculadura() {
          this.display.value = '';
       },
 
-      //apaga um elemento digitado por vez
-      apagaUm() {
+
+      deleteCharacter() {
          this.display.value = this.display.value.slice(0, -1)
       },
 
       clickBtn() {
-         document.addEventListener('click', (event) => { // com arrow functions o this sempre sera o objeto que criou o elemento, nesse caso o this sera a calculadora
+         document.addEventListener('click', (event) => { // com arrow functions o this sempre sera o objeto que criou o elemento, nesse caso o this sera a calculator
             const element = event.target;
             if (element.classList.contains('btn-num')) {
-               this.btnParaDisplay(element.innerText);
+               this.enterValuesInDisplay(element.innerText);
             };
 
             if (element.classList.contains('btn-clear')) {
@@ -56,20 +65,20 @@ function criaCalculadura() {
             };
 
             if (element.classList.contains('btn-del')) {
-               this.apagaUm();
+               this.deleteCharacter();
             };
 
             if (element.classList.contains('btn-eq')) {
-               this.realizaConta();
+               this.startCalculation();
             };
          })
       },
 
-      //para aparecer no display o valor digitado concatenado com outros valores  
-      btnParaDisplay(valor) {
+
+      enterValuesInDisplay(valor) {
          this.display.value += valor;
       },
    }
 }
-const calculadora = criaCalculadura();
-calculadora.inicia();
+const calculator = createCalculator();
+calculator.startCalculator();
