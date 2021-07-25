@@ -9,7 +9,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Open sans", sans-serif;
-  background: #0e0e0e;
+  background: url("./bg2.jpg") no-repeat center;
+  background-size: cover;
   font-size: 1.3em;
   line-height: 1.5em;
   display: flex;
@@ -40,14 +41,9 @@ form input {
   padding: 0 20px;
 }
 
-form input:focus {
-  outline: 1px solid var(--primary-color);
-}
-
-form button {
+tr button {
   border: none;
-  background: var(--primary-color);
-  color: #fff;
+  color: #000;
   font-size: 18px;
   font-weight: 700;
   height: 50px;
@@ -55,18 +51,18 @@ form button {
   margin-top: 30px;
 }
 
-form button:hover {
-  background: var(--primary-color-darker);
-}
-
 .calculadora {
-  width: 400px;
+  width: 500px;
 }
 
 .display {
   font-size: 2em;
   width: 100%;
   text-align: right;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 8px;
 }
 
 .btn {
@@ -74,10 +70,15 @@ form button:hover {
   height: 50px;
   font-size: 1em;
   border: none;
-  background: #dfdfdf;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
   cursor: pointer;
+  transition: 0.5s;
 }
 
 .btn:hover {
-  background: #9e9e9e;
+  background: #000;
+  color: #fafafa;
+  border-bottom: #6cd4ee 3px solid;
+  border-top: #6cd4ee 3px solid;
 }
