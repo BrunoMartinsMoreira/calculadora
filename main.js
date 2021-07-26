@@ -29,11 +29,11 @@ function createCalculator() {
       startCalculation() {
          let calc= this.display.value;
          try {
-            calc= eval(conta);
+            calc= eval(calc);
 
             /*
             aprendam como arrumar um bug XD
-            if (!conta) {
+            if (!calc) {
                 alert('calcinválida, geralmente elas são feitas usando números!')
                 return;
              }*/
@@ -110,29 +110,49 @@ function Calculator() {
       });
    };
 
+   this.initCalc = () => {
+      try {
+         const calc = eval(this.display.value);
+         this.display.value = calc;
+      } catch (err) {
+         alert('Para realizar uma conta favor digitar números.')
+         return;
+      }
+   };
+
    this.clear = () => {
       this.display.value = "";
    };
 
    this.addNumDisplay = (element) => {
       this.display.value += element.innerText;
+      this.display.focus();
    };
 
    this.del = () => {
       this.display.value = this.display.value.slice(0, -1)
    };
 
-   this.pressDelete = () => {
+   this.pressEnter = () => {
       this.display.addEventListener('keyup', (event) => {
-         if (event.keyCode === 46) {
-            this.clear();
+         if (event.keyCode === 13) {
+            this.initCalc()
          }
-      })
-   };
+      });
+   },
+
+      this.pressDelete = () => {
+         this.display.addEventListener('keyup', (event) => {
+            if (event.keyCode === 46) {
+               this.clear();
+            }
+         })
+      };
 
    this.initApp = () => {
       this.eventClicks();
       this.pressDelete();
+      this.pressEnter();
    };
 }
 
